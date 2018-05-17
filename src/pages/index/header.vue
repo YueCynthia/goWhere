@@ -2,12 +2,16 @@
 	<div class="header">
 		<div class="back iconfont">&#xe624;</div>
 		<div class="search"><span class="searchicon iconfont">&#xe632;</span>请输入搜索内容</div>
-		<div class="city">乌鲁木齐</div>
+		<div class="city">{{city}}</div>
 	</div>
 </template>
 <script>
+	import { mapState } from 'vuex'
 	export default{
-		name: 'index-header'
+		name: 'index-header',
+		computed: {
+			...mapState(['city'])
+		}
 	}
 </script>
 <style lang="stylus" scoped>
@@ -33,13 +37,13 @@
 			border-radius: .2rem
 			color: #ccc
 		.city
-			padding: 0 .5rem 0 .2rem
+			padding: 0 .6rem 0 .2rem
 		.searchicon
 			margin: 0 .1rem
 			&:before
 				position: absolute
 				top: .4rem
-				right: .1rem
+				right: .2rem
 				content: "\0020"
 				width: 0
 				height: 0
