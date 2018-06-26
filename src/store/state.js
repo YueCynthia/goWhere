@@ -1,3 +1,4 @@
 export default {
-	city: window.context.city
+	city: ""
+	// window.context.city
 }

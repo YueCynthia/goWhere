@@ -1,47 +1,68 @@
 <template>
-	<div class="icon-wraper">
-		<swiper :options="swiperOption" ref="mySwiper" >
-		    <!-- slides -->
-		    <swiper-slide>
-		    	<div class="area-con">
-		    		<div class="area-item">1</div>
-		    		<div class="area-item">2</div>
-		    		<div class="area-item">3</div>
-		    		<div class="area-item">4</div>
-		    		<div class="area-item">5</div>
-		    		<div class="area-item">6</div>
-		    		<div class="area-item">7</div>
-		    		<div class="area-item">8</div>
-		    	</div>
-		    </swiper-slide>
-		    <swiper-slide>2
-		    </swiper-slide>
-		    <!-- Optional controls -->
-		    <div class="swiper-pagination"  slot="pagination"></div>
-		</swiper>
-	</div>
+	<swiper class="icons" :options="swiperOption" v-if="iconsInfo.length">
+	    <!-- slides -->
+	    <swiper-slide class="icons-page"  v-for="(data,index) in pages" :key="index">
+	    	<div class="icons-list">
+	    		<div class="icons-item" v-for="item in data" :key="item.id">
+					<img :src="item.img" class="icons-img">
+					<p class="icons-title">{{item.title}}</p>
+	    		</div>
+	    	</div>
+	    </swiper-slide>
+	    <!-- Optional controls -->
+	    <div class="swiper-pagination"  slot="pagination"></div>
+	</swiper>
 </template>
 <script>
 	export default {
 		name:"index-icons",
+		props: {
+			iconsInfo: Array
+		},
 		data () {
 			return {
 				swiperOption:{
 					pagination: '.swiper-pagination'
 				}
 			}	
+		},
+		computed: {
+			pages () {
+				const pages = []
+				this.iconsInfo.forEach((value,index) => {
+					const page = Math.floor(index / 8)
+					if(!pages[page]){
+						pages[page] = []
+					}
+					pages[page].push(value)
+				})
+				return pages
+			}
 		}
 	}
 </script>
-<style lang="stylus">
-	.icon-wraper
-		height: 3.8rem
-		background: #fcc
-		.area-con
+<style lang="stylus" scoped>
+@import "../../assets/stylus/varibles.styl"
+.swiper-pagination >>> .swiper-pagination-bullet-active
+    background: $bgColor
+	.icons
+		width:100%
+		overflow:hidden
+		position:relative
+		height:0
+		padding-bottom: 3.4rem
+		.icons-list
 			display: flex
 			flex-wrap: wrap
-			.area-item
-				width:25%
-				height:1.9rem
-				
+			.icons-item
+				width: 25%
+				text-align: center
+				padding-top: .3rem
+				.icons-img
+					width: .66rem
+					height: .66rem
+				.icons-title
+					color: #333
+					font-size: .28rem
+					margin-top: .16rem		
 </style>
