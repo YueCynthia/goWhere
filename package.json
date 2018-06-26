@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "Cynthia <594031742@qq.com>",
-  "homepage": "https://yuecynthia.github.io/goWhere",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^0.18.0",
